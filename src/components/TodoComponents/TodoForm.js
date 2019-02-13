@@ -20,7 +20,6 @@ export default class TodoForm extends React.Component {
     }
 
     render() {
-
         return (
             <div>
                 <input onChange={this.updateInput} type="text" value={this.state.currentInput} />
