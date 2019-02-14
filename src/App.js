@@ -25,12 +25,32 @@ class App extends React.Component {
     }
     this.setState(state => ({items:state.items.concat(newItem)}));
   }
+
+  markItemAsDone = (id) => {
+    this.setState( lastState => ({items:lastState.items.map(item => {
+      if(item.id===id) {
+        return item.completed? 
+          { task: item.task, id, completed: false}:
+          { task: item.task, id, completed: true}
+      }
+      return item;
+    })}), () => console.log(this.state));
+  }
+      
+  deleteCompleted = () => {
+    console.log(this.state.items);
+    this.setState(lastState =>({items :lastState.items.filter(item =>{
+      console.log(item.completed);
+      return !item.completed;
+    })}));
+  }
+
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList todos={this.state.items} />
-        <TodoForm  addTodoToItems={this.addTodoToItems}/>
+        <TodoList markItemAsDone={this.markItemAsDone} todos={this.state.items} />
+        <TodoForm deleteCompleted={this.deleteCompleted} addTodoToItems={this.addTodoToItems}/>
       </div>
     );
   }

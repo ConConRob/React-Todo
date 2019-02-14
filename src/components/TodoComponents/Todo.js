@@ -1,7 +1,7 @@
 import React from 'react';
-
-export default function Todo ({todo}){
+import './Todo.css'
+export default function Todo ({todo, markItemAsDone, completed}){
     return (
-        <li className={`completed-${todo.completed}`}>{todo.task}</li>
+        <li onClick={() =>markItemAsDone(todo.id)} className={`completed-${completed}`}>{todo.task}</li>
     )
 }
